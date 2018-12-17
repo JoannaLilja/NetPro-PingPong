@@ -1,3 +1,4 @@
+package client.view;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -60,6 +61,7 @@ public class Paddle
 		up = true;
 		down = false;
 	}
+	
 	public void setDown()
 	{
 		down = true;
@@ -70,7 +72,9 @@ public class Paddle
 	{
 		up = false; down = false;
 	}
-	public int getY() {
+	
+	public int getY()
+	{
 		return (int)y;
 	}
 	

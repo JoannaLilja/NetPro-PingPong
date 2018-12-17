@@ -1,3 +1,4 @@
+package client.view;
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,11 +7,16 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import client.controller.Controller;
+import shared.Variables;
+
 public class PongBoard extends Applet implements Runnable, KeyListener
 {
+	
+	Controller contr;
 
-	static final int WIDTH = 800;
-	static final int HEIGHT = 500;
+	static final int WIDTH = Variables.BALL_WIDTH;
+	static final int HEIGHT = Variables.BALL_HEIGHT;
 	
 	private Thread thread;
 	
@@ -53,9 +59,12 @@ public class PongBoard extends Applet implements Runnable, KeyListener
 	
 	public void run()
 	{
+		
 		while(true)
 		{
 			p1.move();
+			
+			contr.transmit(); // transmit paddle position
 			
 			repaint();
 			try
