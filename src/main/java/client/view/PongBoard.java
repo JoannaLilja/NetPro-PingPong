@@ -80,6 +80,9 @@ public class PongBoard extends Applet implements Runnable, KeyListener
 		while(true)
 		{
 			p1.move();
+			
+			//contr.transmit(0); // transmit paddle position
+			
 
             // TODO replace the example object serverMessage with the actual serverMessage
             GameStateDTO serverMessage = new GameStateDTO(50,50,50,50);
