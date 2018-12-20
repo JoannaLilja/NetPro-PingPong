@@ -22,9 +22,10 @@ public class Game
 		while(true)
 		{
 			
+			if(!p1.bounce(ball))
+				p2.bounce(ball);
 			
-			//if(!p1.bounce(ball));
-			//p2.bounce();
+			ball.bounceOnEdge();
 			
 			ball.move();
 			p1.move();

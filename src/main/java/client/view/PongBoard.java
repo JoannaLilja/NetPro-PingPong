@@ -29,7 +29,6 @@ public class PongBoard extends Applet implements KeyListener
 
 	public void init()
 	{
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         this.resize(WIDTH,HEIGHT);
         this.setLocation(X,Y);

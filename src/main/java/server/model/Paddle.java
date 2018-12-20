@@ -36,7 +36,6 @@ public class Paddle
 	public void move()
 	{
 		
-		
 		if(up)
 		{
 			yVel = -5;
@@ -59,13 +58,17 @@ public class Paddle
 		
 	}
 	
-	void bounce(Ball b)
+	boolean bounce(Ball b)
 	{
 		
-		// TODO do the thing with the thing
-		
+		// TODO do the fancy thing with the thing
 		if(this.overlapsWith(b))
+		{
 			xVel = -xVel;
+			return true;
+		}
+		
+		return false;
 		
 	}
 

@@ -24,5 +24,16 @@ public class Ball
     {
     	return y;
     }
+
+	public void bounceOnEdge()
+	{
+		
+		if(y<=0)
+			yVel = -yVel;
+		
+		else if(y+HEIGHT>=Variables.BOARD_HEIGHT)
+			yVel = -yVel;
+		
+	}
     
 }
