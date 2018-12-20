@@ -12,8 +12,8 @@ public class Ball
 	
 	public Ball()
 	{
-		x = (PongBoard.WIDTH-this.WIDTH)/2;
-		y = (PongBoard.HEIGHT-this.HEIGHT)/2;
+		x = (Variables.BOARD_WIDTH-this.WIDTH)/2;
+		y = (Variables.BOARD_HEIGHT-this.HEIGHT)/2;
 	}
 	
 
