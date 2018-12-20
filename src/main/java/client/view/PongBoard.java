@@ -72,6 +72,7 @@ public class PongBoard extends Applet implements KeyListener
 		GameStateDTO serverMessage = new GameStateDTO(50,50,50,50);
 		
 		updatePositions(serverMessage);
+
 		
 	}
 
