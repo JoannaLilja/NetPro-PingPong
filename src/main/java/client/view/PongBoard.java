@@ -8,44 +8,61 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import client.controller.Controller;
+import shared.GameStateDTO;
 import shared.Variables;
+
+import javax.swing.*;
 
 public class PongBoard extends Applet implements Runnable, KeyListener
 {
 	
 	Controller contr;
 
-	static final int WIDTH = Variables.BALL_WIDTH;
-	static final int HEIGHT = Variables.BALL_HEIGHT;
+	private static final int WIDTH = Variables.BOARD_WIDTH;
+    private static final int HEIGHT = Variables.BOARD_HEIGHT;
+    private static final int X = (int)Variables.X_POSITION;
+    private static final int Y = (int)Variables.Y_POSITION;
 	
 	private Thread thread;
 	
 	private Paddle p1 = new Paddle(1);
 	private Ball b = new Ball();
-	
+
+	JFrame parent;
+
+	public PongBoard(JFrame parent)
+    {
+        this.parent = parent;
+    }
 
 	public void init()
 	{
-		this.resize(WIDTH,HEIGHT);
-		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		int x = (screenSize.width-WIDTH)/2;
-		int y = (screenSize.height-HEIGHT)/8;
-		
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        this.resize(WIDTH,HEIGHT);
+        this.setLocation(X,Y);
+
 		this.setFocusable(true);
 		this.requestFocusInWindow(true);
-		
-		this.getParent().getParent().setLocation(x, y);
 
-		this.addKeyListener(this);	
+        this.addKeyListener(this);
 		
 		thread = new Thread(this);
 		thread.start();
-	}
+    }
+
+    updatePositions(GameStateDTO positionData)
+    {
+        p1.setPosition();
+        p2.setPosition();
+
+        ball.setPosition();
+    }
 	
 	public void paint(Graphics g)
 	{
+
+
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		p1.draw(g);
@@ -63,9 +80,12 @@ public class PongBoard extends Applet implements Runnable, KeyListener
 		while(true)
 		{
 			p1.move();
-			
-			//contr.transmit(); // transmit paddle position
-			
+
+            // TODO replace the example object serverMessage with the actual serverMessage
+            GameStateDTO serverMessage = new GameStateDTO(50,50,50,50);
+
+            updatePositions(serverMessage);
+
 			repaint();
 			try
 			{
@@ -87,25 +107,23 @@ public class PongBoard extends Applet implements Runnable, KeyListener
 	{
 		if(e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			p1.setUp();
+			// TODO send up message
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
-			p1.setDown();
+		    // TODO send up message
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_UP)
 		{
-			p1.stop();
+			// TODO send stop message
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 		{
-			p1.stop();
+			// TODO send stop message
 		}		
 	}
-	
-	
 
 }
