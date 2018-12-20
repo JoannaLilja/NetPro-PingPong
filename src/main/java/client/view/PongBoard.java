@@ -13,27 +13,19 @@ import shared.Variables;
 
 import javax.swing.*;
 
-public class PongBoard extends Applet implements Runnable, KeyListener
+public class PongBoard extends Applet implements KeyListener
 {
 	
-	Controller contr;
+	private Controller contr;
 
 	private static final int WIDTH = Variables.BOARD_WIDTH;
     private static final int HEIGHT = Variables.BOARD_HEIGHT;
     private static final int X = (int)Variables.X_POSITION;
     private static final int Y = (int)Variables.Y_POSITION;
-	
-	private Thread thread;
-	
-	private Paddle p1 = new Paddle(1);
-	private Ball b = new Ball();
+		
+	private Paddle p1 = new Paddle(1), p2 = new Paddle(2);
 
-	JFrame parent;
-
-	public PongBoard(JFrame parent)
-    {
-        this.parent = parent;
-    }
+	private Ball ball = new Ball();
 
 	public void init()
 	{
@@ -47,26 +39,26 @@ public class PongBoard extends Applet implements Runnable, KeyListener
 
         this.addKeyListener(this);
 		
-		thread = new Thread(this);
-		thread.start();
     }
 
-    updatePositions(GameStateDTO positionData)
+    void updatePositions(GameStateDTO positionData)
     {
-        p1.setPosition();
-        p2.setPosition();
+        p1.setPosition(positionData.getPaddleOnePos());
+        p2.setPosition(positionData.getPaddleTwoPos());
 
-        ball.setPosition();
+        ball.setPosition(positionData.getBallX(), positionData.getBallY());
+        
+        repaint();
     }
 	
 	public void paint(Graphics g)
 	{
 
-
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		p1.draw(g);
-		b.draw(g);
+		p2.draw(g);
+		ball.draw(g);
 	}
 	
 	public void update(Graphics g)
@@ -74,27 +66,12 @@ public class PongBoard extends Applet implements Runnable, KeyListener
 		paint(g);
 	}
 	
-	public void run()
+	public void receiveMessage()
 	{
+		// TODO replace the example object serverMessage with the actual serverMessage
+		GameStateDTO serverMessage = new GameStateDTO(50,50,50,50);
 		
-		while(true)
-		{
-			p1.move();
-
-            // TODO replace the example object serverMessage with the actual serverMessage
-            GameStateDTO serverMessage = new GameStateDTO(50,50,50,50);
-
-            updatePositions(serverMessage);
-
-			repaint();
-			try
-			{
-				Thread.sleep(10);
-			}catch(InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
+		updatePositions(serverMessage);
 		
 	}
 

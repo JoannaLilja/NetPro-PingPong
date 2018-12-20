@@ -13,16 +13,16 @@ public class Main
     {
 
         JFrame jf = new JFrame("Pong");
-        PongBoard pongBoard = new PongBoard(jf);
+        PongBoard pongBoard = new PongBoard();
 
         jf.add(pongBoard);
         jf.pack();
-        jf.setSize(Variables.BOARD_WIDTH,Variables.BOARD_HEIGHT+56);
+        jf.setSize(Variables.BOARD_WIDTH+22,Variables.BOARD_HEIGHT+56);
         jf.setLocation((int)Variables.X_POSITION,(int)Variables.Y_POSITION);
         jf.setVisible(true);
 
         pongBoard.init();
-
+        
 
     }
 }
