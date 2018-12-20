@@ -3,9 +3,9 @@ package shared;
 public class GameStateDTO
 {
 
-    int paddleOnePos;
-    int paddleTwoPos;
-    int ballX, ballY;
+    private int paddleOnePos;
+    private int paddleTwoPos;
+    private int ballX, ballY;
 
     public GameStateDTO(int paddleOnePos, int paddleTwoPos, int ballX, int ballY)
     {
@@ -14,4 +14,25 @@ public class GameStateDTO
         this.ballX = ballX;
         this.ballY = ballY;
     }
+    
+    public int getPaddleOnePos()
+    {
+    	return paddleOnePos;
+    }
+    
+    public int getPaddleTwoPos()
+    {
+    	return paddleTwoPos;
+    }
+    
+    public int getBallX()
+    {
+    	return ballX;
+    }
+    
+    public int getBallY()
+    {
+    	return ballY;
+    }
+    
 }

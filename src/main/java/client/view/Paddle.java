@@ -25,7 +25,7 @@ class Paddle
 
 	void setPosition(int y)
     {
-
+		this.y = y;
     }
 
 	public void draw(Graphics g) {

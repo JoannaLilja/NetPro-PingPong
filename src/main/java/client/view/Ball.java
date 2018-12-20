@@ -8,13 +8,7 @@ public class Ball
 {
 
 	private final int WIDTH = Variables.BALL_WIDTH, HEIGHT = Variables.BALL_HEIGHT;
-	private double x, y;
-	
-	public Ball()
-	{
-		x = (Variables.BOARD_WIDTH-this.WIDTH)/2;
-		y = (Variables.BOARD_HEIGHT-this.HEIGHT)/2;
-	}
+	private double x = (Variables.BOARD_WIDTH-this.WIDTH)/2, y = (Variables.BOARD_HEIGHT-this.HEIGHT)/2;
 	
 
 	public void setPosition(int x, int y)
