@@ -1,37 +1,42 @@
 package client.view;
+import shared.Variables;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Paddle
+class Paddle
 {
 
-	private final int WIDTH = 20, HEIGHT = 100;
+	private final int WIDTH = Variables.PAD_WIDTH, HEIGHT = Variables.PAD_HEIGHT;
 	
-	private double y, yVel;
-	private boolean up, down;
-	private int id, x;
+	private int id, x, y;
 	
-	public Paddle(int id)
+	Paddle(int id)
 	{
 		this.id = id;
 		
-		up = false; down = false;
-		y = 210; yVel = 0;
+		y = (Variables.BOARD_HEIGHT-HEIGHT)/2;
 		
 		if(id == 1)
-			x = 20;
+			x = Variables.PAD_PADDING;
 		else if (id == 2)
-			x = PongBoard.WIDTH-this.WIDTH-20;
+			x = Variables.BOARD_WIDTH-this.WIDTH-Variables.PAD_PADDING;
 	}
+
+	void setPosition(int y)
+    {
+
+    }
+
 	public void draw(Graphics g) {
 
 		g.setColor(Color.green);
-		g.fillRect(x, (int)y, WIDTH, HEIGHT);
+		g.fillRect(x, y, WIDTH, HEIGHT);
 	}
 
 	public void move()
 	{
-		
+		/*
 		
 		if(up)
 		{
@@ -53,30 +58,8 @@ public class Paddle
 			y = PongBoard.HEIGHT-this.HEIGHT;
 		else if (y < 0)
 			y = 0;
-		
-	}
-	
-	public void setUp()
-	{
-		up = true;
-		down = false;
-	}
-	
-	public void setDown()
-	{
-		down = true;
-		up = false;
+		*/
 	}
 
-	public void stop()
-	{
-		up = false; down = false;
-	}
-	
-	public int getY()
-	{
-		return (int)y;
-	}
-	
 
 }
