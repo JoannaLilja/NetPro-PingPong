@@ -64,7 +64,7 @@ public class PongBoard extends Applet implements Runnable, KeyListener
 		{
 			p1.move();
 			
-			//contr.transmit(); // transmit paddle position
+			contr.transmit(0); // transmit paddle position
 			
 			repaint();
 			try

@@ -1,36 +1,38 @@
 package server.net;
 
-import com.sun.xml.internal.ws.api.message.Message;
-
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+
 import java.io.IOException;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 @ServerEndpoint(value = "/pong")
 public class GameEndPoint {
     private Session session;
-    private static Set<GameEndPoint> clients = new CopyOnWriteArraySet<GameEndPoint>();
 
     @OnOpen
-    public void onOpen(Session session) throws IOException {
+    public void onOpen(Session session) {
         this.session = session;
-        clients.add(this);
+
+        // To do: Design an object to maintain and start a new game for each two pairs of clients.
+        System.out.println("Client added to lobby waiting for game to start.");
+
+        // To do: Encapsulate this as an object.
+        session.getAsyncRemote().sendText("Connected to server. Waiting for players");
     }
 
     @OnMessage
-    public void onMessage(Session seesion, Message message) {
-
+    public void onMessage(Session seesion, String message) {
+    	System.out.println("Server received message: " + message);
     }
 
     @OnClose
     public void onClose(Session session) {
-
+        // Clean up.
+        // Send message to other player
     }
 
     @OnError
     public void onError(Session session, Throwable throwable) {
-
+        System.out.println("Server::onError: '" + throwable.getMessage() + "'");
     }
 }
