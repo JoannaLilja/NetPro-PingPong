@@ -1,6 +1,8 @@
 package shared;
 
-public class GameStateDTO
+import java.io.Serializable;
+
+public class GameStateDTO implements Serializable
 {
 
     private int paddleOnePos;
