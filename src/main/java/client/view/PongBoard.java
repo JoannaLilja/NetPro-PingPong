@@ -1,23 +1,24 @@
 package client.view;
 import java.applet.Applet;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import client.controller.Controller;
+import client.net.WebClient;
+import shared.GameCommand;
 import shared.GameStateDTO;
 import shared.Variables;
-
-import javax.swing.*;
 
 public class PongBoard extends Applet implements KeyListener
 {
 	
 	private Controller contr;
-
+	private WebClient toServer;
+	
 	private static final int WIDTH = Variables.BOARD_WIDTH;
     private static final int HEIGHT = Variables.BOARD_HEIGHT;
     private static final int X = (int)Variables.X_POSITION;
@@ -37,7 +38,15 @@ public class PongBoard extends Applet implements KeyListener
 		this.requestFocusInWindow(true);
 
         this.addKeyListener(this);
-		
+		try {
+			toServer = new WebClient(
+					new URI("ws://127.0.0.1:8080/ping-pong/pong"),
+					new ViewUpdateHandler(this)
+					);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     void updatePositions(GameStateDTO positionData)
@@ -71,7 +80,6 @@ public class PongBoard extends Applet implements KeyListener
 		GameStateDTO serverMessage = new GameStateDTO(50,50,50,50);
 		
 		updatePositions(serverMessage);
-
 		
 	}
 
@@ -83,24 +91,13 @@ public class PongBoard extends Applet implements KeyListener
 	public void keyPressed(KeyEvent e)
 	{
 		if(e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			// TODO send up message
-		}
+			toServer.sendCommand(GameCommand.UP);
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-		    // TODO send up message
-		}
+			toServer.sendCommand(GameCommand.DOWN);
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			// TODO send stop message
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			// TODO send stop message
-		}		
+		toServer.sendCommand(GameCommand.STOP);
 	}
 
 }

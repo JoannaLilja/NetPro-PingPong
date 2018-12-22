@@ -4,7 +4,6 @@ import client.view.*;
 import shared.Variables;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Main
 {
