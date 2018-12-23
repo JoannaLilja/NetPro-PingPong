@@ -4,16 +4,19 @@ import shared.GameStateDTO;
 import shared.LobbyState;
 
 public final class Player {
-	private final int playerId;
+	private int playerId;
 	private final ResponseHandler toClient;
 	
-	public Player(int playerId, ResponseHandler toclient) {
-		this.playerId = playerId;
+	public Player(ResponseHandler toclient) {
 		this.toClient = toclient;
 	}
 	
 	public int getId() {
 		return playerId;
+	}
+	
+	public void setId(int id) {
+		this.playerId = id;
 	}
 
 	void sendWaitingForPlayer() {

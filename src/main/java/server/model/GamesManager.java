@@ -31,33 +31,33 @@ public class GamesManager {
 
 	public void addPlayer(String playerId, ResponseHandler response) {
 		
+		Player newPlayer = new Player(response);
+		playersMap.put(playerId, newPlayer);
+		if (setPlayerAsPlayerOne(newPlayer))
+			return;
+		
+		// Player 1 already exists, start a new game and set player as player 2
+		newPlayer.sendWaitingForPlayer();
+		startNewGame(newPlayer);
+	}
+	
+	private boolean setPlayerAsPlayerOne(Player player) {
 		if (playerOne == null) {
 			synchronized (this) {
 				if (playerOne == null) {
-					playerOne = new Player(1, response);
-					playersMap.put(playerId, playerOne);
+					playerOne = player;
+					player.setId(1);
 					playerOne.sendWaitingForPlayer();
-					return;
+					return true;
 				}
 			}
 		}
 		
-		if (!canStartGame()) {
-			System.out.println("Can't start game for some reason.");
-			return;
-		}
-		
-		startNewGame(playerId, response);
+		return false;
 	}
 	
-	private boolean canStartGame() {
-		return playerOne != null;
-	}
-	
-	private void startNewGame(String playerTwoId, ResponseHandler response) {
-		Player playerTwo = new Player(2, response);
-		playerTwo.sendWaitingForPlayer();
-		playersMap.put(playerTwoId, playerTwo);
+	private void startNewGame(Player playerTwo) {
+		playerTwo.setId(2);
 		Game gameInstance = new Game(playerOne, playerTwo);
 		gamesMap.put(playerOne, gameInstance);
 		gamesMap.put(playerTwo, gameInstance);
@@ -78,20 +78,11 @@ public class GamesManager {
 		gamesMap.remove(player);
 		gamesMap.remove(otherPlayer);
 		playersMap.remove(playerId);
-		reAddPlayer(otherPlayer);
-	}
-	
-	private void reAddPlayer(Player player) {
-		if (playerOne == null) {
-			synchronized (this) {
-				if (playerOne == null) {
-					playerOne = player;
-					playerOne.sendWaitingForPlayer();
-					return;
-				}
-			}
-		}
 		
+		if (setPlayerAsPlayerOne(otherPlayer))
+			return;
 		
+		otherPlayer.sendWaitingForPlayer();
+		startNewGame(otherPlayer);
 	}
 }
