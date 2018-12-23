@@ -71,18 +71,17 @@ public class Paddle
 
 	private boolean overlapsWith(Ball b)
 	{
-		if(id == 1)
-		{
-			if((x+WIDTH)>= b.getX() && (x+WIDTH)<= b.getX()+Variables.BALL_WIDTH) 
-				if((y)<= b.getY() && (y+HEIGHT)>= b.getX()+Variables.BALL_WIDTH) 
+		//if(id == 1){
+			if((x+WIDTH) >= b.getX() && (x) <= b.getX()+Variables.BALL_WIDTH) 
+				if((y) <= b.getY() && (y+HEIGHT) >= b.getX()+Variables.BALL_WIDTH) 
 					return true;
-		}
-		else if (id == 2) //TODO opposite side
+		/*}
+		else if (id == 2) 
 		{
-			if((x+WIDTH)>= b.getX() && (x+WIDTH)<= b.getX()+Variables.BALL_WIDTH) 
-				if((y)<= b.getY() && (y+HEIGHT)>= b.getX()+Variables.BALL_WIDTH) 
+			if((x+WIDTH) <= b.getX() && (x)>= b.getX()+Variables.BALL_WIDTH) 
+				if((y) >= b.getY() && (y+HEIGHT) <= b.getX()+Variables.BALL_WIDTH) 
 					return true;
-		}
+		}*/
 		return false;
 	}
 
