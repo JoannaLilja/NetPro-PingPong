@@ -63,7 +63,7 @@ public class GamesManager {
 		gamesMap.put(playerOne, gameInstance);
 		gamesMap.put(playerTwo, gameInstance);
 		playerOne = null;
-		gameInstance.run();
+		gameInstance.startGame();
 	}
 
 	public void playerCommand(String playerId, GameCommand command) {

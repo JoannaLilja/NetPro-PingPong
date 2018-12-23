@@ -28,5 +28,4 @@ public final class Player {
 		toClient.sendGameState(state);
 	}
 
-
 }
