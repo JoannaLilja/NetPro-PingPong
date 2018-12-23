@@ -92,7 +92,6 @@ public class Game implements Runnable
 		runGameLoop = false;
 	}
 
-
 	public Player playerDisconnect(Player playerThatLeft) {
 		stopGame();
 		Player playerStillInGame = playerThatLeft == player1 ? player2 : player1;

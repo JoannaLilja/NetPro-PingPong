@@ -31,7 +31,7 @@ public final class Player {
 		toClient.sendGameState(state);
 	}
 
-	public void sendPlayerDisconnected() {
+	public void sendPlayerDisconnected() {	
 		toClient.sendLobbyState(LobbyState.DISCONNECTED);
 	}
 
