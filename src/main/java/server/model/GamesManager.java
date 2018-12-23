@@ -62,5 +62,6 @@ public class GamesManager {
 		gamesMap.put(playerOne, gameInstance);
 		gamesMap.put(playerTwo, gameInstance);
 		playerOne = null;
+		gameInstance.run();
 	}
 }

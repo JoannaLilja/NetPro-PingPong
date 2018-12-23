@@ -20,7 +20,7 @@ public final class Player {
 		toClient.sendLobbyState(LobbyState.STARTING);
 	}
 
-	public void sendGameStarted(GameStateDTO state) {
+	public void sendGameState(GameStateDTO state) {
 		toClient.sendGameState(state);
 	}
 }
