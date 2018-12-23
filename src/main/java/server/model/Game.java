@@ -39,7 +39,7 @@ public class Game implements Runnable
 	}
 	
 	
-	private void startGame()
+	void startGame()
 	{
 		runGameLoop = true;
 		new Thread(this).start();
