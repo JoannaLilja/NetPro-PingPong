@@ -85,12 +85,13 @@ public class GamesManager {
 		if (playerOne == null) {
 			synchronized (this) {
 				if (playerOne == null) {
-					playerOne = new Player(1, response);
-					playersMap.put(playerId, playerOne);
+					playerOne = player;
 					playerOne.sendWaitingForPlayer();
 					return;
 				}
 			}
 		}
+		
+		
 	}
 }
