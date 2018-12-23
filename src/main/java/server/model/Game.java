@@ -48,8 +48,12 @@ public class Game implements Runnable
 	
 	public void run()
 	{
-		
-		// TODO add timer
+				
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		
 		player1.sendGameIsStarting();
 		player2.sendGameIsStarting();
@@ -66,17 +70,13 @@ public class Game implements Runnable
 			paddle1.move();
 			paddle2.move();
 			System.out.println("BallX: " + ball.getX() + "BallY: " + ball.getY());
-			if (ball.outOfBounds()) {
-				System.out.println("Ball was out of bounds.");
-				runGameLoop = false;
-			}
 				
 			GameStateDTO state = new GameStateDTO(paddle1.getY(),paddle2.getY(),ball.getX(),ball.getY());
 			player1.sendGameState(state);
 			player2.sendGameState(state);
 			
 			try {
-				Thread.sleep(100); // TODO may need to change to a more suitable amount of time
+				Thread.sleep(10); // TODO may need to change to a more suitable amount of time
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();

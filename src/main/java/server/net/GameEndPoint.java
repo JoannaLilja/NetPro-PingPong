@@ -22,7 +22,7 @@ public class GameEndPoint {
     public void onMessage(Session session, String message) {
     	GameCommand command = GameCommand.valueOf(message.toUpperCase());
     	gamesMngr.playerCommand(session.getId(), command);
-    	System.out.println("Server received command: " + command.toString());
+    	//System.out.println("Server received command: " + command.toString());
     }
 
     @OnClose
