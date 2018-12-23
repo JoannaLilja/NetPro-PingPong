@@ -69,14 +69,14 @@ public class Game implements Runnable
 			
 			paddle1.move();
 			paddle2.move();
-			System.out.println("BallX: " + ball.getX() + "BallY: " + ball.getY());
+			//System.out.println("BallX: " + ball.getX() + "BallY: " + ball.getY());
 				
 			GameStateDTO state = new GameStateDTO(paddle1.getY(),paddle2.getY(),ball.getX(),ball.getY());
 			player1.sendGameState(state);
 			player2.sendGameState(state);
 			
 			try {
-				Thread.sleep(10); // TODO may need to change to a more suitable amount of time
+				Thread.sleep(20); // TODO may need to change to a more suitable amount of time
 			} catch (InterruptedException e)
 			{
 				e.printStackTrace();

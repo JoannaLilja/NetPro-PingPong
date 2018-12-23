@@ -7,7 +7,7 @@ public class Ball
     private final int WIDTH = Variables.BALL_WIDTH, HEIGHT = Variables.BALL_HEIGHT;
     
     private int x, y;
-    private double xVel = -10, yVel = -5;
+    private double xVel = -2, yVel = -1;
 
     void move()
     {
@@ -53,14 +53,14 @@ public class Ball
 		if(x<0)
 		{
 			// TODO give points
-			System.err.println("Reset position left side");
+			//System.err.println("Reset position left side");
 			resetPosition();
 		}
 		
 		if(x>Variables.BOARD_WIDTH+WIDTH)
 		{
 			// TODO give points
-			System.err.println("Reset position right side");
+			//System.err.println("Reset position right side");
 			resetPosition();
 		}
 
