@@ -71,4 +71,10 @@ public class GamesManager {
 		Game gameInstance = gamesMap.get(player);
 		gameInstance.receiveCommand(command, player);
 	}
+
+	public void playerDisconnect(String playerId) {
+		Player player = playersMap.get(playerId);
+		Game gameInstance = gamesMap.get(player);
+		gameInstance.stop
+	}
 }
