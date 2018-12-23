@@ -19,8 +19,9 @@ public class GameEndPoint {
     }
 
     @OnMessage
-    public void onMessage(Session seesion, String message) {
+    public void onMessage(Session session, String message) {
     	GameCommand command = GameCommand.valueOf(message.toUpperCase());
+    	gamesMngr.playerCommand(session.getId(), command);
     	System.out.println("Server received command: " + command.toString());
     }
 

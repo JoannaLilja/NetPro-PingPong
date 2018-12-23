@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import shared.GameCommand;
 import shared.LobbyState;
 
 public class GamesManager {
@@ -63,5 +64,11 @@ public class GamesManager {
 		gamesMap.put(playerTwo, gameInstance);
 		playerOne = null;
 		gameInstance.run();
+	}
+
+	public void playerCommand(String playerId, GameCommand command) {
+		Player player = playersMap.get(playerId);
+		Game gameInstance = gamesMap.get(player);
+		gameInstance.receiveCommand(command, player);
 	}
 }

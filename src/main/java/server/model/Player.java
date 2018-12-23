@@ -28,4 +28,8 @@ public final class Player {
 	public void sendGameState(GameStateDTO state) {
 		toClient.sendGameState(state);
 	}
+
+	public int getId() {
+		return playerId;
+	}
 }

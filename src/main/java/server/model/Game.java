@@ -1,5 +1,6 @@
 package server.model;
 
+import shared.GameCommand;
 import shared.GameStateDTO;
 
 public class Game implements Runnable
@@ -24,7 +25,7 @@ public class Game implements Runnable
 	}
 
 
-	void receiveCommand(String command, Player player)
+	void receiveCommand(GameCommand command, Player player)
 	{
 		if(player.getId() == 1)
 			paddle1.command(command);
