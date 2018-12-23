@@ -59,12 +59,17 @@ public class Game implements Runnable
 			if(!paddle1.bounce(ball))
 				paddle2.bounce(ball);
 			
+			ball.move();
 			ball.bounceOnEdge();
 			
-			ball.move();
 			paddle1.move();
 			paddle2.move();
-			
+			System.out.println("BallX: " + ball.getX() + "BallY: " + ball.getY());
+			if (ball.outOfBounds()) {
+				System.out.println("Ball was out of bounds.");
+				runGameLoop = false;
+			}
+				
 			GameStateDTO state = new GameStateDTO(paddle1.getY(),paddle2.getY(),ball.getX(),ball.getY());
 			player1.sendGameState(state);
 			player2.sendGameState(state);

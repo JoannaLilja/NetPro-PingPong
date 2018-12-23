@@ -64,5 +64,12 @@ public class Ball
 
 		
 	}
+
+	public boolean outOfBounds() {
+		if (x < 0 || x+WIDTH > Variables.BOARD_WIDTH || y-HEIGHT> 0 || y < (-1*Variables.BOARD_HEIGHT))
+			return true;
+		
+		return false;
+	}
     
 }
