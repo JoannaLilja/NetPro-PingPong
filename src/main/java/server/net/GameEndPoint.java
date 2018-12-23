@@ -28,7 +28,6 @@ public class GameEndPoint {
     @OnClose
     public void onClose(Session session, CloseReason reason) {
         gamesMngr.playerDisconnect(session.getId());
-        // Send message to other player
     	System.out.println("Session closed: " + reason);
     }
 

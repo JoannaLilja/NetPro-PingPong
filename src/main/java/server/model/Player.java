@@ -29,7 +29,7 @@ public final class Player {
 	}
 
 	public void sendPlayerDisconnected() {
-		toClient.sendPlayerDisconnected
+		toClient.sendLobbyState(LobbyState.DISCONNECTED);
 	}
 
 }

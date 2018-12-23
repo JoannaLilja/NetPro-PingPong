@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import shared.GameCommand;
-import shared.LobbyState;
 
 public class GamesManager {
 	private static GamesManager instance = null;
@@ -75,6 +74,23 @@ public class GamesManager {
 	public void playerDisconnect(String playerId) {
 		Player player = playersMap.get(playerId);
 		Game gameInstance = gamesMap.get(player);
-		gameInstance.playerDisconnect(player);
+		Player otherPlayer = gameInstance.playerDisconnect(player);
+		gamesMap.remove(player);
+		gamesMap.remove(otherPlayer);
+		playersMap.remove(playerId);
+		reAddPlayer(otherPlayer);
+	}
+	
+	private void reAddPlayer(Player player) {
+		if (playerOne == null) {
+			synchronized (this) {
+				if (playerOne == null) {
+					playerOne = new Player(1, response);
+					playersMap.put(playerId, playerOne);
+					playerOne.sendWaitingForPlayer();
+					return;
+				}
+			}
+		}
 	}
 }
