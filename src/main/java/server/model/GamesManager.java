@@ -34,7 +34,7 @@ public class GamesManager {
 		if (playerOne == null) {
 			synchronized (this) {
 				if (playerOne == null) {
-					playerOne = new Player(playerId, response);
+					playerOne = new Player(1, response);
 					playersMap.put(playerId, playerOne);
 					playerOne.sendWaitingForPlayer();
 					return;
@@ -55,7 +55,7 @@ public class GamesManager {
 	}
 	
 	private void startNewGame(String playerTwoId, ResponseHandler response) {
-		Player playerTwo = new Player(playerTwoId, response);
+		Player playerTwo = new Player(2, response);
 		playerTwo.sendWaitingForPlayer();
 		playersMap.put(playerTwoId, playerTwo);
 		Game gameInstance = new Game(playerOne, playerTwo);
