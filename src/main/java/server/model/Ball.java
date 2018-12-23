@@ -7,7 +7,7 @@ public class Ball
     private final int WIDTH = Variables.BALL_WIDTH, HEIGHT = Variables.BALL_HEIGHT;
     
     private int x, y;
-    private double xVel = -1, yVel = -1;
+    private double xVel = -10, yVel = -5;
 
     void move()
     {
