@@ -73,15 +73,6 @@ public class PongBoard extends Applet implements KeyListener
 	{
 		paint(g);
 	}
-	
-	public void receiveMessage()
-	{
-		// TODO replace the example object serverMessage with the actual serverMessage
-		GameStateDTO serverMessage = new GameStateDTO(50,50,50,50);
-		
-		updatePositions(serverMessage);
-		
-	}
 
 	public void keyTyped(KeyEvent e)
 	{

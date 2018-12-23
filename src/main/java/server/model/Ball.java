@@ -37,7 +37,7 @@ public class Ball
     void resetPosition()
     {
     	x = (Variables.BOARD_WIDTH-this.WIDTH)/2;
-    	y = -(Variables.BOARD_HEIGHT-this.HEIGHT)/2;
+    	y = (Variables.BOARD_HEIGHT-this.HEIGHT)/2;
 
     }
 
@@ -47,18 +47,20 @@ public class Ball
 		if(y<=0)
 			yVel = -yVel;
 		
-		else if(y-HEIGHT<=-Variables.BOARD_HEIGHT)
+		else if(y+HEIGHT >= Variables.BOARD_HEIGHT)
 			yVel = -yVel;
 		
 		if(x<0)
 		{
 			// TODO give points
+			System.err.println("Reset position left side");
 			resetPosition();
 		}
 		
 		if(x>Variables.BOARD_WIDTH+WIDTH)
 		{
 			// TODO give points
+			System.err.println("Reset position right side");
 			resetPosition();
 		}
 
@@ -66,7 +68,7 @@ public class Ball
 	}
 
 	public boolean outOfBounds() {
-		if (x < 0 || x+WIDTH > Variables.BOARD_WIDTH || y-HEIGHT> 0 || y < (-1*Variables.BOARD_HEIGHT))
+		if (x < 0 || x+WIDTH > Variables.BOARD_WIDTH || y < 0 || y+HEIGHT > (Variables.BOARD_HEIGHT))
 			return true;
 		
 		return false;
