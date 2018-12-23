@@ -24,11 +24,6 @@ public class Game implements Runnable
 			ball = new Ball();
 			runGameLoop = true;
 			
-			GameStateDTO state = new GameStateDTO(p1.getY(), p2.getY(), ball.getX(), ball.getY());
-			player1.sendGameStarted(state);
-			player2.sendGameStarted(state);
-			
-			new Thread(this).start();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -44,8 +39,15 @@ public class Game implements Runnable
 	}
 	
 	
+	private void startGame()
+	{
+		runGameLoop = true;
+		new Thread(this).start();
+	}
+	
 	public void run()
 	{
+		
 		
 		while(runGameLoop)
 		{
@@ -59,6 +61,9 @@ public class Game implements Runnable
 			p1.move();
 			p2.move();
 			
+			GameStateDTO state = new GameStateDTO(p1.getY(),p2.getY(),ball.getX(),ball.getY());
+			player1.sendGameState(state);
+			player2.sendGameState(state);
 			
 			try {
 				Thread.sleep(100); // TODO may need to change to a more suitable amount of time
@@ -67,7 +72,6 @@ public class Game implements Runnable
 				e.printStackTrace();
 			}
 			
-			// TODO send state to clients here
 			
 		}
 		
