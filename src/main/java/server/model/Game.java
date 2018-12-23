@@ -90,6 +90,13 @@ public class Game implements Runnable
 	public void stopGame() 
 	{
 		runGameLoop = false;
+	}
+
+
+	public void playerDisconnect(Player playerThatLeft) {
+		stopGame();
+		Player playerStillInGame = playerThatLeft == player1 ? player2 : player1;
+		playerStillInGame.sendPlayerDisconnected();
 	} 
 	
 
