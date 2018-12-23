@@ -75,6 +75,6 @@ public class GamesManager {
 	public void playerDisconnect(String playerId) {
 		Player player = playersMap.get(playerId);
 		Game gameInstance = gamesMap.get(player);
-		gameInstance.stop
+		gameInstance.playerDisconnect(player);
 	}
 }
