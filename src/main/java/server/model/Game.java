@@ -21,6 +21,7 @@ public class Game implements Runnable
 		paddle2 = new Paddle(2);
 			
 		ball = new Ball();
+		ball.resetPosition();
 
 	}
 
@@ -41,7 +42,7 @@ public class Game implements Runnable
 	
 	void startGame()
 	{
-		runGameLoop = true;
+		runGameLoop = false;
 		new Thread(this).start();
 	}
 	
