@@ -30,7 +30,7 @@ public class Paddle
 
     public int getY()
     {
-        return (int)y;
+        return y;
     }
     
     public int getX() { return x;}
