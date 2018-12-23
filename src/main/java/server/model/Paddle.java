@@ -8,7 +8,7 @@ public class Paddle
 {
     private final int WIDTH = Variables.PAD_WIDTH, HEIGHT = Variables.PAD_HEIGHT;
     private int id, x, y;
-    private double xVel, yVel;
+    //private double xVel, yVel;
     private boolean up, down;
 
     public Paddle(int id)
@@ -34,28 +34,24 @@ public class Paddle
     }
 
 	
+    
+    
+    
 	public void move()
 	{
 		
 		if(up)
 		{
-			yVel = -5;
+			y += -5;
+			if (y < 0)
+				y = 0;
 		}
 		else if(down)
 		{
-			yVel = 5;
-
+			y += 5;
+			if (y > Variables.BOARD_HEIGHT-this.HEIGHT)
+				y = Variables.BOARD_HEIGHT-this.HEIGHT;
 		}
-		else if(!up && !down)
-		{
-			yVel = 0;
-		}
-		
-		y += yVel;
-		if (y > Variables.BOARD_HEIGHT-this.HEIGHT)
-			y = Variables.BOARD_HEIGHT-this.HEIGHT;
-		else if (y < 0)
-			y = 0;
 		
 	}
 	
@@ -65,7 +61,7 @@ public class Paddle
 		// TODO do the fancy thing with the thing
 		if(this.overlapsWith(b))
 		{
-			xVel = -xVel;
+			b.setXVel(-b.getXVel());
 			return true;
 		}
 		

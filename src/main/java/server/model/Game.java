@@ -7,37 +7,35 @@ public class Game implements Runnable
 {
 	
 	private Ball ball;
-	private Paddle p1, p2;
+	private Paddle paddle1, paddle2;
 	private Player player1, player2;
 	private volatile boolean runGameLoop;
 
-	public Game(Player player1, Player player2) {
-		try {
-			player1.sendGameIsStarting();
-			player2.sendGameIsStarting();
-			Thread.sleep(5000);
-			this.player1 = player1;
-			this.player2 = player2;
+	public Game(Player player1, Player player2)
+	{
+
+		this.player1 = player1;
+		this.player2 = player2;
 			
-			p1 = new Paddle(1);
-			p2 = new Paddle(2);
+		paddle1 = new Paddle(1);
+		paddle2 = new Paddle(2);
 			
-			ball = new Ball();
-			runGameLoop = true;
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		ball = new Ball();
+
 	}
 
 
 	void receiveCommand(GameCommand command, Player player)
 	{
 		if(player.getId() == 1)
-			p1.command(command);
-		if(player.getId() == 2)
-			p2.command(command);
-		System.out.println("Player " + player.getId() + " made command: " + command.toString());
+			paddle1.command(command);
+		else if(player.getId() == 2)
+			paddle2.command(command);
+		else
+		{
+			System.err.println("Player id does not exist");
+			runGameLoop = false;
+		}
 	}
 	
 	
@@ -50,20 +48,24 @@ public class Game implements Runnable
 	public void run()
 	{
 		
+		// TODO add timer
+		
+		player1.sendGameIsStarting();
+		player2.sendGameIsStarting();
 		
 		while(runGameLoop)
 		{
 			
-			if(!p1.bounce(ball))
-				p2.bounce(ball);
+			if(!paddle1.bounce(ball))
+				paddle2.bounce(ball);
 			
 			ball.bounceOnEdge();
 			
 			ball.move();
-			p1.move();
-			p2.move();
+			paddle1.move();
+			paddle2.move();
 			
-			GameStateDTO state = new GameStateDTO(p1.getY(),p2.getY(),ball.getX(),ball.getY());
+			GameStateDTO state = new GameStateDTO(paddle1.getY(),paddle2.getY(),ball.getX(),ball.getY());
 			player1.sendGameState(state);
 			player2.sendGameState(state);
 			
@@ -80,7 +82,10 @@ public class Game implements Runnable
 		
 	}
 	
-	public void stopGame() { runGameLoop = false; } 
+	public void stopGame() 
+	{
+		runGameLoop = false;
+	} 
 	
 
 }

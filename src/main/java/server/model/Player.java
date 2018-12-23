@@ -11,8 +11,13 @@ public final class Player {
 		this.playerId = playerId;
 		this.toClient = toclient;
 	}
+	
+	int getId()
+	{
+		return playerId;
+	}
 
-	public void sendWaitingForPlayer() {
+	void sendWaitingForPlayer() {
 		toClient.sendLobbyState(LobbyState.WAITING);
 	}
 
