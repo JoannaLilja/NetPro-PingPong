@@ -24,6 +24,15 @@ public class Ball
     {
     	return y;
     }
+    
+    double getXVel()
+    {
+    	return xVel;
+    }
+    void setXVel(double xVel)
+    {
+    	this.xVel = xVel;
+    }
 
 	public void bounceOnEdge()
 	{
