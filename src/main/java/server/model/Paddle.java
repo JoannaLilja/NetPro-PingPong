@@ -32,6 +32,8 @@ public class Paddle
     {
         return (int)y;
     }
+    
+    public int getX() { return x;}
 
 	
     
@@ -73,7 +75,7 @@ public class Paddle
 	{
 		//if(id == 1){
 			if((x+WIDTH) >= b.getX() && (x) <= b.getX()+Variables.BALL_WIDTH) 
-				if((y) <= b.getY() && (y+HEIGHT) >= b.getX()+Variables.BALL_WIDTH) 
+				if((y) <= b.getY() && (y+HEIGHT) >= b.getY()+Variables.BALL_WIDTH) 
 					return true;
 		/*}
 		else if (id == 2) 
