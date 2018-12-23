@@ -37,7 +37,7 @@ public class Ball
     void resetPosition()
     {
     	x = (Variables.BOARD_WIDTH-this.WIDTH)/2;
-    	y = (Variables.BOARD_HEIGHT-this.HEIGHT)/2;
+    	y = -(Variables.BOARD_HEIGHT-this.HEIGHT)/2;
 
     }
 
