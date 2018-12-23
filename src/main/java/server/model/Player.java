@@ -12,8 +12,7 @@ public final class Player {
 		this.toClient = toclient;
 	}
 	
-	int getId()
-	{
+	public int getId() {
 		return playerId;
 	}
 
@@ -29,7 +28,5 @@ public final class Player {
 		toClient.sendGameState(state);
 	}
 
-	public int getId() {
-		return playerId;
-	}
+
 }
