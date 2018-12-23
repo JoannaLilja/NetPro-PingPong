@@ -4,10 +4,10 @@ import shared.GameStateDTO;
 import shared.LobbyState;
 
 public final class Player {
-	private final String playerId;
+	private final int playerId;
 	private final ResponseHandler toClient;
 	
-	public Player(String playerId, ResponseHandler toclient) {
+	public Player(int playerId, ResponseHandler toclient) {
 		this.playerId = playerId;
 		this.toClient = toclient;
 	}
@@ -22,5 +22,9 @@ public final class Player {
 
 	public void sendGameState(GameStateDTO state) {
 		toClient.sendGameState(state);
+	}
+
+	public int getId() {
+		return playerId;
 	}
 }

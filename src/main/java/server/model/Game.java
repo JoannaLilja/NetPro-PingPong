@@ -1,5 +1,6 @@
 package server.model;
 
+import shared.GameCommand;
 import shared.GameStateDTO;
 
 public class Game implements Runnable
@@ -30,12 +31,13 @@ public class Game implements Runnable
 	}
 
 
-	void receiveCommand(String command, int clientId)
+	void receiveCommand(GameCommand command, Player player)
 	{
-		if(clientId == 1)
+		if(player.getId() == 1)
 			p1.command(command);
-		if(clientId == 2)
+		if(player.getId() == 2)
 			p2.command(command);
+		System.out.println("Player " + player.getId() + " made command: " + command.toString());
 	}
 	
 	

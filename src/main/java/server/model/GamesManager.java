@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import shared.GameCommand;
 import shared.LobbyState;
 
 public class GamesManager {
@@ -34,7 +35,7 @@ public class GamesManager {
 		if (playerOne == null) {
 			synchronized (this) {
 				if (playerOne == null) {
-					playerOne = new Player(playerId, response);
+					playerOne = new Player(1, response);
 					playersMap.put(playerId, playerOne);
 					playerOne.sendWaitingForPlayer();
 					return;
@@ -55,7 +56,7 @@ public class GamesManager {
 	}
 	
 	private void startNewGame(String playerTwoId, ResponseHandler response) {
-		Player playerTwo = new Player(playerTwoId, response);
+		Player playerTwo = new Player(2, response);
 		playerTwo.sendWaitingForPlayer();
 		playersMap.put(playerTwoId, playerTwo);
 		Game gameInstance = new Game(playerOne, playerTwo);
@@ -63,5 +64,11 @@ public class GamesManager {
 		gamesMap.put(playerTwo, gameInstance);
 		playerOne = null;
 		gameInstance.run();
+	}
+
+	public void playerCommand(String playerId, GameCommand command) {
+		Player player = playersMap.get(playerId);
+		Game gameInstance = gamesMap.get(player);
+		gameInstance.receiveCommand(command, player);
 	}
 }

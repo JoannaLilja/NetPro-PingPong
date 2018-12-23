@@ -1,6 +1,7 @@
 package server.model;
 
 
+import shared.GameCommand;
 import shared.Variables;
 
 public class Paddle
@@ -89,20 +90,20 @@ public class Paddle
 		return false;
 	}
 
-	public void command(String command)
+	public void command(GameCommand command)
 	{
 		
-		if(command.equals("stop"))
+		if(command == GameCommand.STOP)
 		{
 			stop();
 			return;
 		}
-		if(command.equals("up"))
+		if(command == GameCommand.UP)
 		{
 			up();
 			return;
 		}
-		if(command.equals("down"))
+		if(command == GameCommand.DOWN)
 		{
 			down();
 			return;

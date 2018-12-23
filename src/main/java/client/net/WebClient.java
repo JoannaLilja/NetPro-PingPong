@@ -56,7 +56,7 @@ public class WebClient {
 				
 				GameStateDTO gameState = (GameStateDTO) ois.readObject();
 				toView.gameUpdateReceived(gameState);
-				System.out.println("Received GameStateDTO");
+
 				bis.close();
 				ois.close();
 			} catch (IOException | ClassNotFoundException ex) {
