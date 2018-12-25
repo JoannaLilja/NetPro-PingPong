@@ -8,7 +8,7 @@ public class Main {
 	{
 		
         new AppletFrame("Client 1");
-        new AppletFrame("Client 2");
+        //new AppletFrame("Client 2");
 
 	}
 

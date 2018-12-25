@@ -49,14 +49,14 @@ public class Game implements Runnable
 	public void run()
 	{
 				
+		player1.sendGameIsStarting();
+		player2.sendGameIsStarting();
+		
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		
-		player1.sendGameIsStarting();
-		player2.sendGameIsStarting();
 		
 		while(runGameLoop)
 		{
@@ -95,7 +95,6 @@ public class Game implements Runnable
 	public Player playerDisconnect(Player playerThatLeft) {
 		stopGame();
 		Player playerStillInGame = playerThatLeft == player1 ? player2 : player1;
-		playerStillInGame.sendPlayerDisconnected();
 		return playerStillInGame;
 	} 
 }

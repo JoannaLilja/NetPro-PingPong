@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.net.URI;
 import java.util.Base64;
 
+import javax.print.DocFlavor.STRING;
 import javax.websocket.ClientEndpoint;
 import javax.websocket.CloseReason;
 import javax.websocket.ContainerProvider;
@@ -26,14 +27,10 @@ public class WebClient {
 	private Session session;
 	private UpdateHandler toView;
 	
-	public WebClient(URI endPoint, UpdateHandler toView) {
+	public WebClient(URI endPoint, UpdateHandler toView) throws DeploymentException, IOException {
 		WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-		try {
 			this.toView = toView;
 			container.connectToServer(this, endPoint);
-		} catch (DeploymentException | IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@OnOpen
@@ -47,7 +44,20 @@ public class WebClient {
 		
 		try {
 			LobbyState command = LobbyState.valueOf(message.toUpperCase());
-			System.out.println("Received status: " + command.toString());
+			
+			switch (command) {
+			case WAITING:
+				toView.sendViewMEssage("Joined game queue. Waiting for players.");
+				break;
+			
+			case STARTING:
+				toView.sendViewMEssage("Player found. Game is about to start in 5 seconds. Get ready...");
+				break;
+			
+			case DISCONNECTED:
+				toView.sendViewMEssage("The other player has disconnected. Game has ended.");
+				break;
+			}
 		} catch (IllegalArgumentException e) {
 			try {
 				byte data[] = Base64.getDecoder().decode(message);
@@ -67,8 +77,9 @@ public class WebClient {
 	
 	@OnClose
 	public void onClose(Session session, CloseReason reason) {
-		System.out.println("Socket closed: " + reason.getReasonPhrase());
 		this.session = null;
+		toView.sendViewMEssage("Lost connection to game server. Please restart the game.");
+		System.exit(0);
 	}
 	
 	@OnError

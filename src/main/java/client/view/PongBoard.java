@@ -28,7 +28,7 @@ public class PongBoard extends Applet implements KeyListener
 
 	private Ball ball = new Ball();
 
-	public void init()
+	public void init(WebClient toServer)
 	{
 
         this.resize(WIDTH,HEIGHT);
@@ -38,15 +38,7 @@ public class PongBoard extends Applet implements KeyListener
 		this.requestFocusInWindow(true);
 
         this.addKeyListener(this);
-		try {
-			toServer = new WebClient(
-					new URI("ws://127.0.0.1:8080/ping-pong/pong"),
-					new ViewUpdateHandler(this)
-					);
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        this.toServer = toServer;
     }
 
     void updatePositions(GameStateDTO positionData)
@@ -89,6 +81,10 @@ public class PongBoard extends Applet implements KeyListener
 
 	public void keyReleased(KeyEvent e) {
 		toServer.sendCommand(GameCommand.STOP);
+	}
+
+	public void close() {
+		toServer.sendCommand(GameCommand.QUIT);
 	}
 
 }

@@ -1,5 +1,7 @@
 package server.net;
 
+import java.io.EOFException;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
@@ -22,7 +24,6 @@ public class GameEndPoint {
     public void onMessage(Session session, String message) {
     	GameCommand command = GameCommand.valueOf(message.toUpperCase());
     	gamesMngr.playerCommand(session.getId(), command);
-    	//System.out.println("Server received command: " + command.toString());
     }
 
     @OnClose
@@ -33,7 +34,22 @@ public class GameEndPoint {
 
     @OnError
     public void onError(Session session, Throwable throwable) {
-        System.out.println("Server::onError: '" + throwable.getMessage() + "'");
+    	if (getRootCause(throwable) instanceof EOFException) {
+    		// Connection with client has closed. Do nothing,
+    		return;
+    	}
+    	
+    	System.out.println("Server::onError: '" + throwable.getMessage() + "'\n");
         throwable.printStackTrace();
+    }
+    
+    private Throwable getRootCause(Throwable e) {
+        Throwable cause = null; 
+        Throwable result = e;
+
+        while(null != (cause = result.getCause())  && (result != cause) ) {
+            result = cause;
+        }
+        return result;
     }
 }

@@ -66,14 +66,25 @@ public class GamesManager {
 	}
 
 	public void playerCommand(String playerId, GameCommand command) {
+		
+		if (command == GameCommand.QUIT) {
+			playerDisconnect(playerId);
+			return;
+		}
+		
 		Player player = playersMap.get(playerId);
+		
 		Game gameInstance = gamesMap.get(player);
 		gameInstance.receiveCommand(command, player);
 	}
 
 	public void playerDisconnect(String playerId) {
 		Player player = playersMap.get(playerId);
+		if (player == null) return;
+		
 		Game gameInstance = gamesMap.get(player);
+		if (gameInstance == null) return;
+		
 		Player otherPlayer = gameInstance.playerDisconnect(player);
 		gamesMap.remove(player);
 		gamesMap.remove(otherPlayer);
