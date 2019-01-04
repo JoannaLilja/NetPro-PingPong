@@ -11,6 +11,7 @@ import javax.websocket.DeploymentException;
 import org.junit.Test;
 
 import client.view.AppletFrame;
+import client.view.ViewUpdateHandler;
 import shared.GameCommand;
 
 public class WebClientTest
@@ -23,7 +24,7 @@ public class WebClientTest
 		try {
 			toServer = new WebClient(
 					new URI("ws://127.0.0.1:8080/ping-pong/pong"),
-					null
+					new ViewUpdateHandler(null)
 					);
 		} catch (URISyntaxException ignore) {
 		} catch (DeploymentException | IOException e) {
@@ -58,6 +59,7 @@ public class WebClientTest
 		
 		int y0 = af.getPongBoard().getPaddle().getY();
 		
+		assertTrue("Webclient is null...", af.getWebClient() != null);
 		af.getWebClient().sendCommand(GameCommand.UP);
 		
 		int loops = 0;
@@ -68,7 +70,6 @@ public class WebClientTest
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			y1 = af.getPongBoard().getPaddle().getY();

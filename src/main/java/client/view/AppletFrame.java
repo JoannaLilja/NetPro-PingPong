@@ -22,7 +22,7 @@ public class AppletFrame extends JFrame
 		super(title);
 		
 		pongBoard = new PongBoard();
-		WebClient toServer = null;
+		toServer = null;
 		
 		try {
 			toServer = new WebClient(
