@@ -4,7 +4,7 @@ import shared.Variables;
 import java.awt.Color;
 import java.awt.Graphics;
 
-class Paddle
+public class Paddle
 {
 
 	private final int WIDTH = Variables.PAD_WIDTH, HEIGHT = Variables.PAD_HEIGHT;
@@ -33,10 +33,17 @@ class Paddle
 		g.setColor(Color.green);
 		g.fillRect(x, y, WIDTH, HEIGHT);
 	}
-
+	
+	
+	public int getY()
+	{
+		return y;
+	}
+	
+	/*
 	public void move()
 	{
-		/*
+		
 		
 		if(up)
 		{
@@ -58,8 +65,8 @@ class Paddle
 			y = PongBoard.HEIGHT-this.HEIGHT;
 		else if (y < 0)
 			y = 0;
-		*/
+		
 	}
-
+	*/
 
 }

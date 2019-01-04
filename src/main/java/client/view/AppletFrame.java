@@ -13,12 +13,15 @@ import shared.Variables;
 public class AppletFrame extends JFrame
 {
 		
+	private final PongBoard pongBoard;
+	private WebClient toServer;
+	
 	public AppletFrame(String title)
 	{
 		
 		super(title);
 		
-		PongBoard pongBoard = new PongBoard();
+		pongBoard = new PongBoard();
 		WebClient toServer = null;
 		
 		try {
@@ -47,6 +50,16 @@ public class AppletFrame extends JFrame
 		    	System.exit(0);
 		    }
 		});
+	}
+	
+	//Getters for testing:
+	public PongBoard getPongBoard()
+	{
+		return pongBoard;
+	}
+	public WebClient getWebClient()
+	{
+		return toServer;
 	}
 
 }
