@@ -41,7 +41,8 @@ public class WebClientTest
 	}
 
 	@Test
-	public void testSendCommand(GameCommand UP) {
+	public void testSendCommand() {
+		
 		
 		/*WebClient toServer = connect();
 		
@@ -57,7 +58,7 @@ public class WebClientTest
 		
 		int y0 = af.getPongBoard().getPaddle().getY();
 		
-		af.getWebClient().sendCommand(UP);
+		af.getWebClient().sendCommand(GameCommand.UP);
 		
 		int loops = 0;
 		
