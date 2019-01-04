@@ -19,7 +19,7 @@ public final class Player {
 		this.playerId = id;
 	}
 
-	void sendWaitingForPlayer() {
+	void sendWaitingForPlayer() {		
 		toClient.sendLobbyState(LobbyState.WAITING);
 	}
 

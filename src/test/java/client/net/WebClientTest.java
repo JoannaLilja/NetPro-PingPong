@@ -10,28 +10,76 @@ import javax.websocket.DeploymentException;
 
 import org.junit.Test;
 
-public class WebClientTest {
+import client.view.AppletFrame;
+import client.view.ViewUpdateHandler;
+import shared.GameCommand;
 
-	@Test
-	public void testWebClient() {
+public class WebClientTest
+{
+	
+	private WebClient connect()
+	{
 		WebClient toServer = null;
-		
+
 		try {
 			toServer = new WebClient(
 					new URI("ws://127.0.0.1:8080/ping-pong/pong"),
-					null
+					new ViewUpdateHandler(null)
 					);
 		} catch (URISyntaxException ignore) {
 		} catch (DeploymentException | IOException e) {
 			toServer = null;
 		}
 		
+		return toServer;
+	}
+
+	@Test
+	public void testWebClient() {
+		
+		WebClient toServer = connect();
 		assertTrue("Failed to connect to server", toServer != null);
 	}
 
 	@Test
 	public void testSendCommand() {
-		fail("Not yet implemented");	
+		
+		
+		/*WebClient toServer = connect();
+		
+		toServer.
+		
+		
+		if(toServer==null)
+			fail("Failed to connect to server");
+		
+		toServer.sendCommand(GameCommand.UP);*/
+		
+		AppletFrame af = new AppletFrame("Client 1");
+		
+		int y0 = af.getPongBoard().getPaddle().getY();
+		
+		assertTrue("Webclient is null...", af.getWebClient() != null);
+		af.getWebClient().sendCommand(GameCommand.UP);
+		
+		int loops = 0;
+		
+		int y1 = y0;
+		while(y0 == y1 && loops < 10)
+		{
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			y1 = af.getPongBoard().getPaddle().getY();
+			loops++;
+		}
+		
+		
+		assertTrue("Failed to connect to server", y1!=y0);
+		
+		
 	}
 
 }

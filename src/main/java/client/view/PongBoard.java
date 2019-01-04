@@ -86,5 +86,10 @@ public class PongBoard extends Applet implements KeyListener
 	public void close() {
 		toServer.sendCommand(GameCommand.QUIT);
 	}
-
+	
+	//Getters for testing
+	public Paddle getPaddle()
+	{
+		return p1;
+	}
 }
