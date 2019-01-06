@@ -92,7 +92,8 @@ public class GamesManager {
 		if (gameInstance == null) return;
 		
 		Player otherPlayer = gameInstance.playerDisconnect(player);
-
+		otherPlayer.sendPlayerDisconnected();
+		
 		gamesMap.remove(player);
 		gamesMap.remove(otherPlayer);
 		playersMap.remove(playerId);
