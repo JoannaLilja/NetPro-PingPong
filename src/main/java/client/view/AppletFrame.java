@@ -52,7 +52,6 @@ public class AppletFrame extends JFrame
 		});
 	}
 	
-	//Getters for testing:
 	public PongBoard getPongBoard()
 	{
 		return pongBoard;
