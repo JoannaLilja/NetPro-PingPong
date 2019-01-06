@@ -77,7 +77,7 @@ public class WebClientTest
 		}
 		
 		
-		assertTrue("Failed to connect to server", y1!=y0);
+		assertTrue("Command had no effect", y1!=y0);
 		
 		
 	}
