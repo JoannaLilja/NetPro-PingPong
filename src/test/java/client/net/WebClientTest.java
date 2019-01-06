@@ -56,8 +56,16 @@ public class WebClientTest
 		toServer.sendCommand(GameCommand.UP);*/
 		
 		AppletFrame af = new AppletFrame("Client 1");
+		new AppletFrame("Client 2");
 		
 		int y0 = af.getPongBoard().getPaddle().getY();
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		assertTrue("Webclient is null...", af.getWebClient() != null);
 		af.getWebClient().sendCommand(GameCommand.UP);
