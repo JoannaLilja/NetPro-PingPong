@@ -23,5 +23,5 @@ public class Ball
 		g.fillRect((int)x, (int)y, WIDTH, HEIGHT);
 	}
 	
-	
+	public double getY() { return this.y; }
 }

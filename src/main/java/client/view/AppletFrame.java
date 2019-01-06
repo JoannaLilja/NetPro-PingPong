@@ -1,5 +1,6 @@
 package client.view;
 
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,7 +20,14 @@ public class AppletFrame extends JFrame
 	public AppletFrame(String title)
 	{
 		
-		super(title);
+		super(title);		
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	pongBoard.close();
+		    	dispose();
+		    }
+		});
 		
 		pongBoard = new PongBoard();
 		toServer = null;
@@ -33,7 +41,8 @@ public class AppletFrame extends JFrame
 			// Don't need to do anything.
 		} catch (DeploymentException | IOException e) {
 			System.out.println("Failed to connect to server. Please try again later.");
-			System.exit(0);
+			closeFrame();
+			return;
 		} 
 		
 	    this.add(pongBoard);
@@ -42,14 +51,6 @@ public class AppletFrame extends JFrame
 	    this.setVisible(true);
 
 	    pongBoard.init(toServer);
-		
-		this.addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		    	pongBoard.close();
-		    	System.exit(0);
-		    }
-		});
 	}
 	
 	public PongBoard getPongBoard()
@@ -59,6 +60,11 @@ public class AppletFrame extends JFrame
 	public WebClient getWebClient()
 	{
 		return toServer;
+	}
+	
+	public void closeFrame()
+	{
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 
 }

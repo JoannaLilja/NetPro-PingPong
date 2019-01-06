@@ -1,6 +1,7 @@
 package server.net;
 
 import java.io.EOFException;
+import java.io.IOException;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -34,7 +35,8 @@ public class GameEndpoint {
 
     @OnError
     public void onError(Session session, Throwable throwable) {
-    	if (getRootCause(throwable) instanceof EOFException) {
+    	if (getRootCause(throwable) instanceof EOFException || 
+			getRootCause(throwable) instanceof IOException) {
     		// Connection with client has closed. Do nothing,
     		return;
     	}

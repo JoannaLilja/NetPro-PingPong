@@ -92,4 +92,12 @@ public class WebClient {
 		session.getAsyncRemote().sendText(command.toString());
 	}
 	
+	public void close() {
+		try {
+			session.close();
+		} catch (IOException e) {
+			// do nothing
+		}
+	}
+	
 }

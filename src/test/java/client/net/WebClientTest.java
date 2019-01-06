@@ -2,6 +2,7 @@ package client.net;
 
 import static org.junit.Assert.*;
 
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -39,24 +40,15 @@ public class WebClientTest
 		
 		WebClient toServer = connect();
 		assertTrue("Failed to connect to server", toServer != null);
+		toServer.sendCommand(GameCommand.QUIT);
 	}
 
 	@Test
 	public void testSendCommand() {
 		
 		
-		/*WebClient toServer = connect();
-		
-		toServer.
-		
-		
-		if(toServer==null)
-			fail("Failed to connect to server");
-		
-		toServer.sendCommand(GameCommand.UP);*/
-		
 		AppletFrame af = new AppletFrame("Client 1");
-		new AppletFrame("Client 2");
+		AppletFrame af2 = new AppletFrame("Client 2");
 		
 		int y0 = af.getPongBoard().getPaddle().getY();
 		
@@ -84,9 +76,33 @@ public class WebClientTest
 			loops++;
 		}
 		
-		
+		af.closeFrame();
+		af2.closeFrame();
+
 		assertTrue("Command had no effect", y1!=y0);
 		
+	}
+	
+	@Test
+	public void testSameState() {
+		
+		
+		AppletFrame p1 = new AppletFrame("Player 1");
+		AppletFrame p2 = new AppletFrame("Player 2");
+		
+		try {
+			Thread.sleep(5500);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
+		double p1y = p1.getPongBoard().getBall().getY();
+		double p2y = p2.getPongBoard().getBall().getY();
+		
+		p1.closeFrame();
+		p2.closeFrame();
+		
+		assertTrue("Players don't have same state", p1y == p2y);
 		
 	}
 
