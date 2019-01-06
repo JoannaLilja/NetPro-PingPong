@@ -80,7 +80,8 @@ public class PongBoard extends Applet implements KeyListener
 	}
 
 	public void keyReleased(KeyEvent e) {
-		toServer.sendCommand(GameCommand.STOP);
+		if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN)
+			toServer.sendCommand(GameCommand.STOP);
 	}
 
 	public void close() {

@@ -55,7 +55,7 @@ public class WebClient {
 				break;
 			
 			case DISCONNECTED:
-				toView.sendViewMEssage("The other player has disconnected. Game has ended.");
+				toView.sendViewMEssage("The other player has disconnected. Game has ended. Waiting for players.");
 				break;
 			}
 		} catch (IllegalArgumentException e) {

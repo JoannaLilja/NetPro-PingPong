@@ -75,6 +75,9 @@ public class GamesManager {
 		Player player = playersMap.get(playerId);
 		
 		Game gameInstance = gamesMap.get(player);
+		if (gameInstance == null)
+			return;
+		
 		gameInstance.receiveCommand(command, player);
 	}
 
@@ -82,10 +85,14 @@ public class GamesManager {
 		Player player = playersMap.get(playerId);
 		if (player == null) return;
 		
+		if (playerOne == player)
+			playerOne = null;
+		
 		Game gameInstance = gamesMap.get(player);
 		if (gameInstance == null) return;
 		
 		Player otherPlayer = gameInstance.playerDisconnect(player);
+
 		gamesMap.remove(player);
 		gamesMap.remove(otherPlayer);
 		playersMap.remove(playerId);
@@ -93,7 +100,6 @@ public class GamesManager {
 		if (setPlayerAsPlayerOne(otherPlayer))
 			return;
 		
-		otherPlayer.sendWaitingForPlayer();
 		startNewGame(otherPlayer);
 	}
 }
