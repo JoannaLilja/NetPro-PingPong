@@ -6,8 +6,8 @@ import java.util.Map;
 
 import shared.GameCommand;
 
-public class GamesManager {
-	private static GamesManager instance = null;
+public class GameManager {
+	private static GameManager instance = null;
 	private static Player playerOne;
 	
 	private static Map<Player, Game> gamesMap = 
@@ -16,18 +16,18 @@ public class GamesManager {
 	private static Map<String, Player> playersMap = 
 			Collections.synchronizedMap(new HashMap<String, Player>());
 	
-	public static GamesManager getInstance() {
+	public static GameManager getInstance() {
 		if (instance == null) {
-			synchronized(GamesManager.class) {
+			synchronized(GameManager.class) {
 				if (instance == null) 
-					instance = new GamesManager();
+					instance = new GameManager();
 			}
 		}
 		
 		return instance;
 	}
 	
-	private GamesManager() {}
+	private GameManager() {}
 
 	public void addPlayer(String playerId, ResponseHandler response) {
 		

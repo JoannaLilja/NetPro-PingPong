@@ -5,13 +5,13 @@ import java.io.EOFException;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
-import server.model.GamesManager;
+import server.model.GameManager;
 import shared.GameCommand;
 
 
 @ServerEndpoint(value = "/pong")
 public class GameEndpoint {
-    private GamesManager gamesMngr = GamesManager.getInstance();
+    private GameManager gamesMngr = GameManager.getInstance();
     private ResponseHandler toClient;
     
     @OnOpen
