@@ -3,19 +3,19 @@ package server.model;
 import shared.GameStateDTO;
 import shared.LobbyState;
 
-public final class Player {
+final class Player {
 	private int playerId;
 	private final ResponseHandler toClient;
 	
-	public Player(ResponseHandler toclient) {
+	Player(ResponseHandler toclient) {
 		this.toClient = toclient;
 	}
 	
-	public int getId() {
+	int getId() {
 		return playerId;
 	}
 	
-	public void setId(int id) {
+	void setId(int id) {
 		this.playerId = id;
 	}
 
@@ -23,15 +23,15 @@ public final class Player {
 		toClient.sendLobbyState(LobbyState.WAITING);
 	}
 
-	public void sendGameIsStarting() {
+	void sendGameIsStarting() {
 		toClient.sendLobbyState(LobbyState.STARTING);
 	}
 
-	public void sendGameState(GameStateDTO state) {
+	void sendGameState(GameStateDTO state) {
 		toClient.sendGameState(state);
 	}
 
-	public void sendPlayerDisconnected() {	
+	void sendPlayerDisconnected() {	
 		toClient.sendLobbyState(LobbyState.DISCONNECTED);
 	}
 

@@ -4,14 +4,14 @@ package server.model;
 import shared.GameCommand;
 import shared.Variables;
 
-public class Paddle
+class Paddle
 {
     private final int WIDTH = Variables.PAD_WIDTH, HEIGHT = Variables.PAD_HEIGHT;
     private int id, x, y;
     //private double xVel, yVel;
     private boolean up, down;
 
-    public Paddle(int id)
+    Paddle(int id)
     {
         this.id = id;
 
@@ -28,18 +28,17 @@ public class Paddle
         this.y = y;
     }
 
-    public int getY()
+    int getY()
     {
         return y;
     }
     
-    public int getX() { return x;}
-
-	
+    int getX()
+    { 
+    	return x;
+    }
     
-    
-    
-	public void move()
+	void move()
 	{
 		
 		if(up)
@@ -87,7 +86,7 @@ public class Paddle
 		return false;
 	}
 
-	public void command(GameCommand command)
+	void command(GameCommand command)
 	{
 		
 		if(command == GameCommand.STOP)

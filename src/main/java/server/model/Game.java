@@ -3,7 +3,7 @@ package server.model;
 import shared.GameCommand;
 import shared.GameStateDTO;
 
-public class Game implements Runnable
+class Game implements Runnable
 {
 	
 	private Ball ball;
@@ -11,7 +11,7 @@ public class Game implements Runnable
 	private Player player1, player2;
 	private volatile boolean runGameLoop;
 
-	public Game(Player player1, Player player2)
+	Game(Player player1, Player player2)
 	{
 
 		this.player1 = player1;
@@ -87,12 +87,12 @@ public class Game implements Runnable
 		
 	}
 	
-	public void stopGame() 
+	void stopGame() 
 	{
 		runGameLoop = false;
 	}
 
-	public Player playerDisconnect(Player playerThatLeft) {
+	Player playerDisconnect(Player playerThatLeft) {
 		stopGame();
 		Player playerStillInGame = playerThatLeft == player1 ? player2 : player1;
 		return playerStillInGame;

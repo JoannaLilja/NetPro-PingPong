@@ -2,7 +2,7 @@ package server.model;
 
 import shared.Variables;
 
-public class Ball
+class Ball
 {
     private final int WIDTH = Variables.BALL_WIDTH, HEIGHT = Variables.BALL_HEIGHT;
     
@@ -41,7 +41,7 @@ public class Ball
 
     }
 
-	public void bounceOnEdge()
+	void bounceOnEdge()
 	{
 		
 		if(y<=0)
@@ -67,7 +67,7 @@ public class Ball
 		
 	}
 
-	public boolean outOfBounds() {
+	boolean outOfBounds() {
 		if (x < 0 || x+WIDTH > Variables.BOARD_WIDTH || y < 0 || y+HEIGHT > (Variables.BOARD_HEIGHT))
 			return true;
 		
