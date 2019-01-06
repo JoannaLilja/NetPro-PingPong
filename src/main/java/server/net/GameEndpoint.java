@@ -10,7 +10,7 @@ import shared.GameCommand;
 
 
 @ServerEndpoint(value = "/pong")
-public class GameEndPoint {
+public class GameEndpoint {
     private GamesManager gamesMngr = GamesManager.getInstance();
     private ResponseHandler toClient;
     
