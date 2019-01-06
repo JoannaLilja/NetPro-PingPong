@@ -33,7 +33,7 @@ public class GamesManager {
 		
 		Player newPlayer = new Player(response);
 		playersMap.put(playerId, newPlayer);
-		if (setPlayerAsPlayerOne(newPlayer))
+		if (setPlayerAsPlayerOne(newPlayer, true))
 			return;
 		
 		// Player 1 already exists, start a new game and set player as player 2
@@ -41,13 +41,13 @@ public class GamesManager {
 		startNewGame(newPlayer);
 	}
 	
-	private boolean setPlayerAsPlayerOne(Player player) {
+	private boolean setPlayerAsPlayerOne(Player player, boolean send) {
 		if (playerOne == null) {
 			synchronized (this) {
 				if (playerOne == null) {
 					playerOne = player;
 					player.setId(1);
-					playerOne.sendWaitingForPlayer();
+					if(send)playerOne.sendWaitingForPlayer();
 					return true;
 				}
 			}
@@ -97,7 +97,7 @@ public class GamesManager {
 		gamesMap.remove(otherPlayer);
 		playersMap.remove(playerId);
 		
-		if (setPlayerAsPlayerOne(otherPlayer))
+		if (setPlayerAsPlayerOne(otherPlayer, false))
 			return;
 		
 		startNewGame(otherPlayer);

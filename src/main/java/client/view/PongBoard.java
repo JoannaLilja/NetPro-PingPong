@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.URI;
-import java.net.URISyntaxException;
 
-import client.controller.Controller;
 import client.net.WebClient;
 import shared.GameCommand;
 import shared.GameStateDTO;
@@ -16,7 +13,6 @@ import shared.Variables;
 public class PongBoard extends Applet implements KeyListener
 {
 	
-	private Controller contr;
 	private WebClient toServer;
 	
 	private static final int WIDTH = Variables.BOARD_WIDTH;
@@ -88,7 +84,6 @@ public class PongBoard extends Applet implements KeyListener
 		toServer.sendCommand(GameCommand.QUIT);
 	}
 	
-	//Getters for testing
 	public Paddle getPaddle()
 	{
 		return p1;
