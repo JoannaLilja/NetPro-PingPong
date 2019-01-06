@@ -43,6 +43,11 @@ public class GameEndpoint {
     	
     	System.out.println("Server::onError: '" + throwable.getMessage() + "'\n");
         throwable.printStackTrace();
+        
+        try {
+			session.close();
+		} catch (IOException e) {
+		}
     }
     
     private Throwable getRootCause(Throwable e) {

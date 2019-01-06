@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Random;
 
 import javax.websocket.DeploymentException;
 
@@ -103,6 +104,37 @@ public class WebClientTest
 		p2.closeFrame();
 		
 		assertTrue("Players don't have same state", p1y == p2y);
+		
+	}
+	
+	@Test
+	public void testPlayerDisconnect() {
+		AppletFrame p1 = new AppletFrame("Player 1");
+		AppletFrame p2 = new AppletFrame("Player 2");
+		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
+		p1.closeFrame();
+		
+		AppletFrame p3 = new AppletFrame("Player 3");
+		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
+		double p2y = p2.getPongBoard().getBall().getY();
+		double p3y = p3.getPongBoard().getBall().getY();
+		
+		p2.closeFrame();
+		p3.closeFrame();
+		
+		assertTrue("Didn't match player 2 and player 3.", p2y == p3y);
 		
 	}
 
